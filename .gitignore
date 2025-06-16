@@ -1,3 +1,10 @@
 # Project
 .idea
 .vscode
+
+# vendor
+/scripts/
+/log/*
+cli
+.*_*_swagger.json
+./settings/config.json
