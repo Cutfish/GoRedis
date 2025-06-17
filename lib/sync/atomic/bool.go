@@ -1,6 +1,8 @@
 package atomic
 
-import "sync/atomic"
+import (
+	"sync/atomic"
+)
 
 // Boolean is a boolean value, all actions of it is atomic
 type Boolean uint32
@@ -13,6 +15,7 @@ func (b *Boolean) Get() bool {
 // Set writes the value atomically
 func (b *Boolean) Set(v bool) {
 	if v {
+		// 注意这里必须需要类型转换
 		atomic.StoreUint32((*uint32)(b), 1)
 	} else {
 		atomic.StoreUint32((*uint32)(b), 0)

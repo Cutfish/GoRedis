@@ -51,7 +51,7 @@ func (h *EchoHandler) Handle(ctx context.Context, conn net.Conn) {
 		msg, err := reader.ReadString('\n')
 		if err != nil {
 			if err == io.EOF {
-				logger.Info("connection close")
+				logger.Infof("client %s connection close", conn.RemoteAddr().String())
 				h.activeConn.Delete(client)
 			} else {
 				logger.Warn(err)
@@ -82,7 +82,7 @@ func (c *Client) Close() error {
 
 // 关闭服务器
 func (h *EchoHandler) Close() error {
-	logger.Info("handler shutting down...")
+	logger.Info("server handler shutting down...")
 	h.closing.Set(true)
 	// 逐个关闭连接
 	h.activeConn.Range(func(key interface{}, val interface{}) bool {
