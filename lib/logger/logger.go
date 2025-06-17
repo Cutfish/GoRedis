@@ -47,7 +47,7 @@ var std = New(os.Stdout, INFO, true)
 
 func New(out io.Writer, level LogLevel, colorful bool) *Logger {
 	return &Logger{
-		Logger:   log.New(out, "", log.LstdFlags|log.Lshortfile),
+		Logger:   log.New(out, "", log.LstdFlags), // 移除了 log.Lshortfile
 		level:    level,
 		output:   out,
 		colorful: colorful,
@@ -64,7 +64,7 @@ func (l *Logger) SetOutput(w io.Writer) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	l.output = w
-	l.Logger = log.New(l.output, "", log.LstdFlags|log.Lshortfile)
+	l.Logger = log.New(l.output, "", log.LstdFlags) // 移除了 log.Lshortfile
 }
 
 func (l *Logger) log(level LogLevel, depth int, msg string) {
@@ -74,7 +74,6 @@ func (l *Logger) log(level LogLevel, depth int, msg string) {
 
 	if l.colorful {
 		color := levelColors[level]
-		// 整行使用相同颜色
 		l.Output(depth+1, fmt.Sprintf("%s%s%s", color, msg, reset))
 	} else {
 		l.Output(depth+1, msg)
