@@ -3,7 +3,7 @@ package protocol
 import (
 	"bytes"
 
-	"go-redis/interface/redis"
+	"GoRedis/interface/redis"
 )
 
 // PongReply is +PONG

@@ -1,12 +1,12 @@
 package parser
 
 import (
+	"GoRedis/interface/redis"
+	"GoRedis/lib/logger"
+	"GoRedis/redis/protocol"
 	"bufio"
 	"bytes"
 	"errors"
-	"go-redis/interface/redis"
-	"go-redis/lib/logger"
-	"go-redis/redis/protocol"
 	"io"
 	"runtime/debug"
 	"strconv"
