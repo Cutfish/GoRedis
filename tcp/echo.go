@@ -1,11 +1,11 @@
 package tcp
 
 import (
+	"GoRedis/lib/logger"
+	"GoRedis/lib/sync/atomic"
+	"GoRedis/lib/sync/wait"
 	"bufio"
 	"context"
-	"go-redis/lib/logger"
-	"go-redis/lib/sync/atomic"
-	"go-redis/lib/sync/wait"
 	"io"
 	"net"
 	"sync"

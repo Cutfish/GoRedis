@@ -3,8 +3,8 @@ package tcp
 import (
 	"context"
 	"fmt"
-	"go-redis/interface/tcp"
-	"go-redis/lib/logger"
+	"GoRedis/interface/tcp"
+	"GoRedis/lib/logger"
 	"net"
 	"os"
 	"os/signal"

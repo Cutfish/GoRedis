@@ -1,7 +1,7 @@
 package main
 
 import (
-	"go-redis/tcp"
+	"GoRedis/tcp"
 )
 
 var cfg tcp.Config = tcp.Config{

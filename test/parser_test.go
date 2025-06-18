@@ -1,11 +1,11 @@
 package test
 
 import (
+	"GoRedis/interface/redis"
+	"GoRedis/lib/utils"
+	"GoRedis/redis/parser"
+	"GoRedis/redis/protocol"
 	"bytes"
-	"go-redis/interface/redis"
-	"go-redis/lib/utils"
-	"go-redis/redis/parser"
-	"go-redis/redis/protocol"
 	"io"
 	"testing"
 )

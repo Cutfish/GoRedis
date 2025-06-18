@@ -1,7 +1,7 @@
 package test
 
 import (
-	"go-redis/lib/logger"
+	"GoRedis/lib/logger"
 	"testing"
 )
 
