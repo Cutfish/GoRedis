@@ -1,6 +1,7 @@
 package dict
 
 import (
+	"GoRedis/lib/utils"
 	"math"
 	"sync"
 	"sync/atomic"
@@ -71,7 +72,7 @@ func (dict *ConcurrentDict) Get(key string) (val interface{}, exists bool) {
 		panic("dict is nil")
 	}
 
-	hashCode := fnv32(key)
+	hashCode := utils.Fnv32(key)
 	index := dict.spread(hashCode)
 	shard := dict.getShard(index)
 	shard.mu.Lock()
@@ -93,7 +94,7 @@ func (dict *ConcurrentDict) Put(key string, val interface{}) (result int) {
 	if dict == nil {
 		panic("dict is nil")
 	}
-	hashCode := fnv32(key)
+	hashCode := utils.Fnv32(key)
 	index := dict.spread(hashCode)
 	shard := dict.getShard(index)
 	shard.mu.Lock()
@@ -113,7 +114,7 @@ func (dict *ConcurrentDict) Remove(key string) (val interface{}, result int) {
 	if dict == nil {
 		panic("dict is nil")
 	}
-	hashCode := fnv32(key)
+	hashCode := utils.Fnv32(key)
 	index := dict.spread(hashCode)
 	shard := dict.getShard(index)
 	shard.mu.Lock()
@@ -133,16 +134,4 @@ func (dict *ConcurrentDict) addCount() int32 {
 
 func (dict *ConcurrentDict) decreaseCount() int32 {
 	return atomic.AddInt32(&dict.count, -1)
-}
-
-// 哈希算法采用FNV算法
-const prime32 = uint32(16777619)
-
-func fnv32(key string) uint32 {
-	hash := uint32(2166136261)
-	for i := 0; i < len(key); i++ {
-		hash *= prime32 // 可能会溢出，保留低32位
-		hash ^= uint32(key[i])
-	}
-	return hash
 }

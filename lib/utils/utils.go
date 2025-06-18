@@ -101,3 +101,15 @@ func RemoveDuplicates(input [][]byte) [][]byte {
 
 	return result
 }
+
+// 哈希算法采用FNV算法
+const prime32 = uint32(16777619)
+
+func Fnv32(key string) uint32 {
+	hash := uint32(2166136261)
+	for i := 0; i < len(key); i++ {
+		hash *= prime32 // 可能会溢出，保留低32位
+		hash ^= uint32(key[i])
+	}
+	return hash
+}
